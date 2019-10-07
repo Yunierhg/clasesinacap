@@ -1,0 +1,73 @@
+public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+       mAuth = FirebaseAuth.getInstance();
+
+       final Button buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInAnonymously();
+            }
+        });
+
+
+    }
+
+    private void updateUI(FirebaseUser user) {
+
+        boolean isSignedIn = (user != null);
+
+        if (isSignedIn) {
+            Log.d("TAG001", "El ID " + user.getUid());
+            Intent InicioInten = new Intent(MainActivity.this, InicioActivity.class);
+            startActivity(InicioInten);
+        } else {
+            Log.d("TAG001", "No esta con login");
+        }
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+
+    private void signInAnonymously() {
+
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("TAG001", "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent InicioInten = new Intent(MainActivity.this, InicioActivity.class);
+                            startActivity(InicioInten);
+
+                        } else {
+                            Log.w("TAG001", "signInAnonymously:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+    }
+
+
+}
+
+
+//***********************************************************************************************************************
