@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<--! view-source:https://getbootstrap.com/docs/4.4/examples/dashboard/ -->
+<html>
+    <head>
+        <meta charset="UTF-8">        
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('assets/css/colores.css') }}" type="text/css">
+
+        {% block stylesheets %}{% endblock %}
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/dashboard/">
+        <link id="favicon" rel="shortcut icon"  sizes="48x48" href="{{ asset('assets/logo.png') }}" type="image/png"/>   
+    </head>
+    <body id="body-backgraund" class="alt-bg-fondo alt-bg-default">
+        {% block body %}{% endblock %}
+
+
+
+        <!-- boostrap -->
+
+        <!-- fin de boostrap -->
+
+          {% block javascripts %}{% endblock %}
+
+
+            <script>
+              //se coloca codigo que se requiere ejecutar en todos los lados
+            </script>
+
+    </body>
+</html>
