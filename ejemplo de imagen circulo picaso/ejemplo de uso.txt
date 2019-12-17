@@ -1,0 +1,13 @@
+Picasso.get()
+                    .load(url)
+                    .transform(new CircleTransform())
+                    .error(getDrawable(img_))
+                    .into(img);
+
+****************************************
+
+Picasso.get()
+                    .load(aqui viene la url o el recurso de la imagen)
+                    .transform(new CircleTransform())
+                    .error(aqui puedes poner una imagen para cuando falla la carga)
+                    .into(aqui viene el ImageView);
